@@ -18,6 +18,30 @@ function App() {
         <a href="https://github.com">GitHub</a>
         <a href="https://linkedin.com">LinkedIn</a>
       </div>
+      <form>
+        <label htmlFor="name">Name</label>
+        <input name="name" type="text" placeholder="Enter Name" />
+        <br />
+        <label htmlFor="email">Email</label>
+        <input name="email" type="text" placeholder="Enter email" />
+        <br />
+        <label>
+          Music
+          <input type="checkbox" />
+        </label>
+        <br />
+        <label>
+          Programming
+          <input type="checkbox" />
+        </label>
+        <br />
+        <label>
+          Reading
+          <input type="checkbox" />
+        </label>
+        <br/>
+        <input type="submit" />
+      </form>
     </main>
   );
 }

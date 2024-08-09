@@ -1,13 +1,13 @@
-import { render, screen } from "@testing-library/react";
+import { logRoles, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import App from "../App";
+import App from '../App';
 
 // Portfolio Elements
 test("displays a top-level heading with the text `Hi, I'm _______`", () => {
   render(<App />);
 
-  const topLevelHeading = screen.getByRole("heading", {
+  const topLevelHeading = screen.getByRole('heading', {
     name: /hi, i'm/i,
     exact: false,
     level: 1,
@@ -16,18 +16,18 @@ test("displays a top-level heading with the text `Hi, I'm _______`", () => {
   expect(topLevelHeading).toBeInTheDocument();
 });
 
-test("displays an image of yourself", () => {
+test('displays an image of yourself', () => {
   render(<App />);
 
-  const image = screen.getByAltText("My profile pic");
+  const image = screen.getByAltText('My profile pic');
 
-  expect(image).toHaveAttribute("src", "https://via.placeholder.com/350");
+  expect(image).toHaveAttribute('src', 'https://via.placeholder.com/350');
 });
 
-test("displays second-level heading with the text `About Me`", () => {
+test('displays second-level heading with the text `About Me`', () => {
   render(<App />);
 
-  const secondLevelHeading = screen.getByRole("heading", {
+  const secondLevelHeading = screen.getByRole('heading', {
     name: /about me/i,
     level: 2,
   });
@@ -35,7 +35,7 @@ test("displays second-level heading with the text `About Me`", () => {
   expect(secondLevelHeading).toBeInTheDocument();
 });
 
-test("displays a paragraph for your biography", () => {
+test('displays a paragraph for your biography', () => {
   render(<App />);
 
   const bio = screen.getByText(/lorem ipsum/i);
@@ -43,49 +43,77 @@ test("displays a paragraph for your biography", () => {
   expect(bio).toBeInTheDocument();
 });
 
-test("displays the correct links", () => {
+test('displays the correct links', () => {
   render(<App />);
 
-  const githubLink = screen.getByRole("link", {
+  const githubLink = screen.getByRole('link', {
     name: /github/i,
   });
-  const linkedinLink = screen.getByRole("link", {
+  const linkedinLink = screen.getByRole('link', {
     name: /linkedin/i,
   });
 
   expect(githubLink).toHaveAttribute(
-    "href",
-    expect.stringContaining("https://github.com")
+    'href',
+    expect.stringContaining('https://github.com')
   );
 
   expect(linkedinLink).toHaveAttribute(
-    "href",
-    expect.stringContaining("https://linkedin.com")
+    'href',
+    expect.stringContaining('https://linkedin.com')
   );
 });
 
 // Newsletter Form - Initial State
-test("the form includes text inputs for name and email address", () => {
+//NEED HELP!!!!!!!!
+test('the form includes text inputs for name and email address', () => {
   // your test code here
+  //Arrange
+  render(<App />);
+  //Act
+  const formNameInput = screen.getByLabelText(/name/i);
+  const formEmailInput = screen.getByLabelText(/email/i);
+  //Assert
+  expect(formNameInput).toBeInTheDocument();
+  expect(formEmailInput).toBeInTheDocument();
 });
 
-test("the form includes three checkboxes to select areas of interest", () => {
+test('the form includes three checkboxes to select areas of interest', () => {
   // your test code here
+  render(<App />);
+
+  const interestsCheckboxes = screen.getAllByRole('checkbox');
+  expect(interestsCheckboxes.length).toBe(3);
+
+  for (const interestsCheckbox of interestsCheckboxes) {
+    expect(interestsCheckbox).toBeInTheDocument();
+  }
+});
+//NEED HELP HUIIIII!!!!!
+test('the form includes a submit button', () => {
+  render(<App />);
+
+  logRoles(render(<App />).container);
+  const submitButton = screen.getByRole('button', {
+    name: /submit/i,
+  });
+
+  expect(submitButton).toBeInTheDocument();
 });
 
-test("the checkboxes are initially unchecked", () => {
+test('the checkboxes are initially unchecked', () => {
   // your test code here
 });
 
 // Newsletter Form - Adding Responses
-test("the page shows information the user types into the name and email address form fields", () => {
+test('the page shows information the user types into the name and email address form fields', () => {
   // your test code here
 });
 
-test("checked status of checkboxes changes when user clicks them", () => {
+test('checked status of checkboxes changes when user clicks them', () => {
   // your test code here
 });
 
-test("a message is displayed when the user clicks the Submit button", () => {
+test('a message is displayed when the user clicks the Submit button', () => {
   // your test code here
 });
